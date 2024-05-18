@@ -42,7 +42,7 @@ const Main= ()=> {
               <img src={assets.send_icon} alt='' />
             </div>
           </div>
-          <p className='botttom-info'>Gemini may display inaccurate info, including about people, so double-check its responses.</p>
+          <p className='bottom-info'>Gemini may display inaccurate info, including about people, so double-check its responses.Your privacy and Gemini App</p>
         </div>
       </div>
     </div>
