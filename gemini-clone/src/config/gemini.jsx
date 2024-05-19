@@ -1,12 +1,11 @@
-const apiKey = "AIzaSyC7A_NxA4W7Sx4DtwnlAThugYfhOFUaAy"; // Your API key
-
+const apiKey = "AIzaSyB-quvQwr2hZ-8iN9vaZfmjaKRg7Za98aw"; // Your API key
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(apiKey); // Pass your API key directly
 
 // ...
 
-const model = genAI.getGenerativeModel({ model: "MODEL_NAME" });
+const model = genAI.getGenerativeModel({ model: "v1beta/projects/My 20Project 2042606/models/gemini-pro:generateContent" });
 
 // ...
 
@@ -17,10 +16,29 @@ async function run(prompt) {
     history: [],
   });
 
-  const result = await chatSession.sendMessage(prompt);
-  const response=result.response
-  console.log(result.response.text());
+  try {
+    // Update the fetch request to point to your proxy server
+    const response = await fetch('http://localhost:3001/generateContent', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ prompt })
+    });
 
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.status}`);
+    }
+
+    const result = await response.json();
+    const responseText = result.response.text();
+    console.log(responseText);
+    return responseText;
+  } catch (error) {
+    console.error('Error:', error);
+    // Handle errors gracefully
+    return null;
+  }
 }
 
 const generationConfig = {
@@ -28,7 +46,7 @@ const generationConfig = {
   topP: 0.95,
   topK: 64,
   maxOutputTokens: 8192,
-  responseMimeType: "text",
+  responseMimeType: "application/json",
 };
 
 const safetySettings = [
@@ -50,5 +68,4 @@ const safetySettings = [
   },
 ];
 
-
-export default run
+export default run;
