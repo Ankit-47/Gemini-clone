@@ -1,26 +1,30 @@
-import React from "react";
-import { createContext, useEffect } from "react";
+
+import { createContext, useState } from "react";
 import run from "../config/gemini";
+
 export const Context = createContext();
 
 const ContextProvider = (props) => {
+
+    const[input,setInput] = useState("")
+    const[recentPrompt,setRecentPrompt]=useState("");
+    const[prevPrompts,setPrevPrompts] =useState([]);
+    const[showResult,setShowResult]=useState(false);
+    const[loading,setLoaing]=useState(false);
+    const[resultData,setResultData] =useState("")
+
     const onSent = async (prompt) => {
-  await run (prompt)
-    };
-
-    useEffect(() => {
-        onSent("what is react js");
-    }, []); // The empty array ensures this runs once on mount
-
+        await run(prompt)
+    }
     const contextValue = {
-        // Add any context values or functions here
-    };
 
-    return (
-        <Context.Provider value={contextValue}>
-            {props.children}
-        </Context.Provider>
-    );
-};
+    }
+
+
+return (
+    <Context.Provider value={contextValue}>
+        {props.children}
+    </Context.Provider>
+);}
 
 export default ContextProvider;
