@@ -162,7 +162,7 @@
     animation: loader 3s infinite linear;
 }
 
-@keyframes identifier {
+@keyframes loader {
     0% {
         background-position: -800px;
     }
@@ -170,4 +170,9 @@
     100% {
         background-position: 800px 0px;
     }
+}
+.result-data p{
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.8;
 }
