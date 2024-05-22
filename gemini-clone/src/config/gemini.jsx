@@ -16,19 +16,19 @@ async function run(prompt) {
     history: [],
   });
 
-  try {
-    // Update the fetch request to point to your proxy server
-    const response = await fetch('http://localhost:3001/generateContent', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ prompt })
-    });
+  // try {
+  //   // Update the fetch request to point to your proxy server
+  //   const response = await fetch('http://localhost:3001/generateContent', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({ prompt })
+  //   });
 
-    if (!response.ok) {
-      throw new Error(`Error fetching data: ${response.status}`);
-    }
+  //   if (!response.ok) {
+  //     throw new Error(`Error fetching data: ${response.status}`);
+  //   }
 
     const result = await response.json();
     const responseText = result.response.text();
